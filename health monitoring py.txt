@@ -1,0 +1,94 @@
+import random
+import time
+
+class HealthMonitorSystem:
+    def __init__(self):
+        self.heart_rate_data = []
+        self.blood_pressure_data = []
+        self.sugar_level_data = []
+        self.fever_data = []
+        self.oxygen_level_data = []
+
+    def collect_data(self):
+        # Simulate data collection
+        heart_rate = random.randint(60, 100)  # Simulated heart rate (bpm)
+        blood_pressure = (random.randint(90, 140), random.randint(60, 90))  # Simulated blood pressure (systolic, diastolic)
+        sugar_level = random.uniform(70, 120)  # Simulated sugar level (mg/dL)
+        fever = random.uniform(97.0, 100.0)  # Simulated body temperature (Fahrenheit)
+        oxygen_level = random.randint(90, 100)  # Simulated oxygen level (%)
+
+        self.heart_rate_data.append(heart_rate)
+        self.blood_pressure_data.append(blood_pressure)
+        self.sugar_level_data.append(sugar_level)
+        self.fever_data.append(fever)
+        self.oxygen_level_data.append(oxygen_level)
+
+        print(f"Data collected:")
+        print(f"Heart Rate = {heart_rate} bpm")
+        print(f"Blood Pressure = {blood_pressure}")
+        print(f"Sugar Level = {sugar_level} mg/dL")
+        print(f"Fever = {fever} F")
+        print(f"Oxygen Level = {oxygen_level} %")
+
+    def analyze_data(self):
+        # Analyze the latest collected data
+        latest_heart_rate = self.heart_rate_data[-1]
+        latest_blood_pressure = self.blood_pressure_data[-1]
+        latest_sugar_level = self.sugar_level_data[-1]
+        latest_fever = self.fever_data[-1]
+        latest_oxygen_level = self.oxygen_level_data[-1]
+
+        # Example simple analysis: check for abnormal values
+        warnings = []
+
+        if latest_heart_rate < 70 or latest_heart_rate > 90:
+            warnings.append(f"Abnormal heart rate detected! ({latest_heart_rate} bpm)")
+
+        if latest_blood_pressure[0] < 100 or latest_blood_pressure[0] > 130:
+            warnings.append(f"Abnormal systolic blood pressure detected! ({latest_blood_pressure[0]})")
+
+        if latest_blood_pressure[1] < 60 or latest_blood_pressure[1] > 80:
+            warnings.append(f"Abnormal diastolic blood pressure detected! ({latest_blood_pressure[1]})")
+
+        if latest_sugar_level < 80 or latest_sugar_level > 140:
+            warnings.append(f"Abnormal sugar level detected! ({latest_sugar_level} mg/dL)")
+
+        if latest_fever > 99.0:
+            warnings.append(f"Fever detected! ({latest_fever} F)")
+
+        if latest_oxygen_level < 95:
+            warnings.append(f"Low oxygen level detected! ({latest_oxygen_level} %)")
+
+        if warnings:
+            print("\nHealth Warnings:")
+            for warning in warnings:
+                print(f"- {warning}")
+
+            print("\nRecommended Actions:")
+            print("- Consult a healthcare professional.")
+            print("- Consider taking necessary medications.")
+            print("- Monitor your health closely.")
+
+    def display_menu(self):
+        # Display menu options
+        while True:
+            print("\nHealth Monitoring System Menu:")
+            print("1. Collect Data")
+            print("2. Analyze Data")
+            print("3. Exit")
+
+            choice = input("Enter your choice: ")
+
+            if choice == '1':
+                self.collect_data()
+            elif choice == '2':
+                self.analyze_data()
+            elif choice == '3':
+                print("Exiting...")
+                break
+            else:
+                print("Invalid choice. Please enter 1, 2, or 3.")
+
+if __name__ == "__main__":
+    health_monitor = HealthMonitorSystem()
+    health_monitor.display_menu()
